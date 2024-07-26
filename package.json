@@ -1,0 +1,17 @@
+{
+  "name": "npm-packager",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "ts-node packageDependencies.ts"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "ts-node": "^10.9.2"
+  },
+  "dependencies": {
+    "puppeteer": "^22.14.0"
+  }
+}
