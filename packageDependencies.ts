@@ -8,6 +8,7 @@ type Dependency = {
   integrity?: string;
   requires?: { [key: string]: string };
   dependencies?: Dependencies;
+  optionalDependencies?: Dependencies;
 };
 
 type Dependencies = { [key: string]: Dependency };
@@ -86,10 +87,17 @@ const packAllDependencies = async () => {
       );
       index = (index + 1) % spinner.length;
       if (!packedDependencies.has(name)) {
-        const { version, dependencies: subDependencies } = dependencies[name];
+        const {
+          version,
+          dependencies: subDependencies,
+          optionalDependencies,
+        } = dependencies[name];
         promises.push(packDependency(name, version, promises.length + 1));
         if (subDependencies) {
           promiseToPack(subDependencies);
+        }
+        if (optionalDependencies) {
+          promiseToPack(optionalDependencies);
         }
       }
     }
